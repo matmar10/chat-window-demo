@@ -5,31 +5,26 @@
 
         // used to randomly show a fake username
         users = [
-            "mmartin",
-            "rhalf",
-            "jjohnson",
-            "gpugh",
-            "sbolayad",
-            "msmith",
-            "ggarcia",
-            "therron",
-            "pcarlin",
-            "jjacobson",
-            "flbaum",
-            "tsilverman",
-            "ppott",
-            "mzedung",
-            "rnixon",
-            "gbush",
-            "bobama",
-            "JustSomeGuy123",
-            "HackerKidLolz",
-            "SeriouzDud3",
-            "1337C0d3r",
-            "CatLady",
-            "JohnGalt",
-            "DTaggart",
-            "HankR"
+            "KJongIllin",
+            "rMugabe",
+            "THanshwe",
+            "OHalbashir",
+            "GBerdimuhamedov",
+            "MoGadhafi",
+            "SaddamH",
+            "JoeStalin",
+            "APinochet",
+            "IAmMrPaulBiya",
+            "PapaDocDuvalier",
+            "FranciscoFranco",
+            "MiltonObote",
+            "ASadatFromMisr",
+            "JeanBaptisteBagaza",
+            "WhoYouCallingAHoChiMinh",
+            "Lukashenko",
+            "SaisAfwerki",
+            "FidelC",
+            "KhomeiniTheAyatollah"
         ],
 
         // semiphore to indicate whether we should continue advancing scrollbar with content
@@ -97,7 +92,7 @@
                 // build up array of message objects from raw paragraphs returned
                 var messages = [];
                 $.each(response, function(i, paragraph) {
-                    var randomUserId = generateRandomInteger(10),
+                    var randomUserId = generateRandomInteger(users.length - 1),
                     randomUserName = users[randomUserId];
                     messages.push(new ChatMessage(randomUserName, paragraph));
                 });
