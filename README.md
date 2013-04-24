@@ -36,10 +36,12 @@ Customization
 Options can be overridden within the initialization call:
 
     $(document).ready(function() {
-        $.spreecastChat.init({
+        $.spreecastChat.init($.extend(true, {}, $.spreecastChat.defaults, {
 
             // royal purple for the dictators
-            highlightColor: "#7D26CD",
+            animation: {
+                highlightColor: "#7D26CD"
+            },
 
             // add custom messages in addition to the defaults
             messages: $.spreecastChat.defaults.messages.concat([
@@ -54,7 +56,7 @@ Options can be overridden within the initialization call:
 
             // always use the static messages
             useLoremIpsumRestApi: false
-        });
+        }));
     });
 
 General Notes
