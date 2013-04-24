@@ -20,7 +20,7 @@
 
     <div class="container">
         <div class="row">
-            <h1 class="span12">Skater Chat</h1>
+            <h1 class="span12">Dictator Skater Chat</h1>
             <p class="span12">
                 Where dictators who love to shred come to chat!
             </p>
@@ -56,25 +56,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $.spreecastChat.init({
-
-                // royal purple for the dictators
-                highlightColor: "#7D26CD",
-
-                // add custom messages in addition to the defaults
-                messages: $.spreecastChat.defaults.messages.concat([
-                    "Down with the tyrants!",
-                    "Power to the people!",
-                    "Dictators are boneheads",
-                    "We politely would like to petition for redress of our greivances."
-                ]),
-
-                // woa, cowboy; that's some mighty fast polling!
-                pollDelay: 500,
-
-                // always use the static messages
-                useLoremIpsumRestApi: false
-            });
+            $.spreecastChat.init();
         });
     </script>
 </body>
