@@ -24,31 +24,70 @@ a publicly accessible web server directory. Otherwise it will fallback to static
 
 Testing Notes
 -------------
-
 This demo has been tested on the following browsers using OSX version 10.6.8:
 * Chrome 26.0.1410.65
 * Firefox 20.0
 * Safari 5.1.9
 
+No unit tests have been added.
+
+Customization
+-------------
+Options can be overridden within the initialization call:
+
+    $(document).ready(function() {
+        $.spreecastChat.init({
+
+            // royal purple for the dictators
+            highlightColor: "#7D26CD",
+
+            // add custom messages in addition to the defaults
+            messages: $.spreecastChat.defaults.messages.concat([
+                "Down with the tyrants!",
+                "Power to the people!",
+                "Dictators are boneheads",
+                "We politely would like to petition for redress of our greivances."
+            ]),
+
+            // woa, cowboy; that's some mighty fast polling!
+            pollDelay: 500,
+
+            // always use the static messages
+            useLoremIpsumRestApi: false
+        });
+    });
+
 General Notes
 -------------
 I've opted to append each new message to the list of messages and adjust the scrollbar accordingly.
 
-The scrollbar adjustments must be 'paused' when the user scrolls away from the bottom-most position.
+The scrollbar adjustments are 'paused' when the user scrolls away from the bottom-most position
+and resumed when the user reaches the bottom of the scollable area.
 
-Firefox required the use of the `overflow-y` property but Chrome worked fine without it.
+Firefox required the use of the `overflow-y` property but Chrome worked fine without it. It seems
+silly to have a single CSS file for just a single line of CSS, but I'd rather be dogmatic about
+not inlining CSS (saying "it's just one line" is how such evil things creep in, after all).
 
-Vendor source is included for simplicity.
+Vendor source is included for simplicity, but would normally be declared as dependencies and
+bundled during some sort of install process.
 
-*So what's with the dictators?* Well, I needed a bunch of fake messages and I was hoping
+*So what's with the dictators?*
+Well, I needed a bunch of fake messages and I was hoping
 to use some sort of REST API. The first thing I found was the SkaterIpsum. Then I needed a list of
 interesting sounding names, and I thought the combination  of dictator's names and  skate boardin
-banter was bizarre enough to elicit a laugh. *Disclaimer: I do not condone dictatorial rule.*
+banter was bizarre enough to elicit a laugh. I didn't use them all,
+but I got the names [from here](http://www.25facts.com/top-25-dictators-of-the-world/).
+
+*Disclaimer: I do not condone dictatorial rule. I appologize for any skateboard-loving dictators
+I may have offended by not including them in this chat.*
+
+
+
 
 Problem Statement
 -----------------
 
-From
+From Chris Weber:
 > What it should look like:
 >
 > Newest messages should always appear at the bottom (try to get the bottom alignment via CSS instead of javascript)

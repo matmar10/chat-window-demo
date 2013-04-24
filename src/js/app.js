@@ -3,61 +3,8 @@
         // options
     var o = {},
 
-        // used to randomly show a fake username
-        users = [
-            "KJongIllin",
-            "rMugabe",
-            "THanshwe",
-            "OHalbashir",
-            "GBerdimuhamedov",
-            "MoGadhafi",
-            "SaddamH",
-            "JoeStalin",
-            "APinochet",
-            "IAmMrPaulBiya",
-            "PapaDocDuvalier",
-            "FranciscoFranco",
-            "MiltonObote",
-            "ASadatFromMisr",
-            "JeanBaptisteBagaza",
-            "WhoYouCallingAHoChiMinh",
-            "Lukashenko",
-            "SaisAfwerki",
-            "FidelC",
-            "KhomeiniTheAyatollah"
-        ],
-
         // semiphore to indicate whether we should continue advancing scrollbar with content
         hasScrolled = false,
-
-        // 25 static messages to randomly show in case we're running as a stand-alone HTML page
-        messages = [
-            "Skate ipsum dolor sit amet, vert slappy dude no comply Matt Hensley coper.",
-            "540 skate key rocket air nose grab Justin Regan ollie north.",
-            "Camel back full-cab kingpin heel flip airwalk.",
-            "Opposite footed John Grigley darkslide crail slide heel flip kickturn.",
-            "Saran Wrap nose grab face plant salad grind boardslide.",
-            "Aerial shoveit rails slam concave Vatoland.",
-            "Spine slam wheels sick betty.",
-            "G-turn Jason Dill aerial salad grind opposite footed gap.",
-            "Ollie hang up roll-in finger flip half-cab.",
-            "Rocket air hanger slide melancholy full pipe.",
-            "Steps handplant tuna-flip stalefish axle.",
-            "Stalefish axle set rip grip casper slide Plan B 720.",
-            "Bigspin snake hanger rock and roll christ air mongo stalefish.",
-            "Crooked grind masonite manual lip nose Tod Swank hang up carve.",
-            "Grab locals flypaper Madonna helipop coper shoveit method air.",
-            "Nose blunt concave rock and roll invert rad nollie salad grind.",
-            "H-Street tuna-flip crail slide spine noseblunt slide slob air pool backside.",
-            "Japan air Tracker roll-in wall ride wax Primo slide gnarly.",
-            "Snake kidney skater handplant steps slam 540.",
-            "Baseplate rip grip shoveit shinner pivot frigid air handplant.",
-            "Sponsored nose grab slide kickflip disaster Spike Jonze pool pump.",
-            "Face plant pivot S.K.A.T.E. street soul skate kickturn 360 quarter pipe.",
-            "Acid drop nosepicker death box Wes Humpston boneless kidney bigspin cess slide.",
-            "Nosegrind bearings slappy invert. Drop in slappy mini ramp Sacto flail. ",
-            "Skate key 720 grind noseblunt slide. "
-        ],
 
         // data to be inserted into a new DOM element when received
         ChatMessage = function(userName, message) {
@@ -66,9 +13,9 @@
         },
 
         // thrown when new messages are received; contains multiple messages
-        ChatMessagesReceivedEvent = function(messages) {
+        ChatMessagesReceivedEvent = function(newMessages) {
             this.type = "newMessagesReceived";
-            this.messages = messages || [];
+            this.messages = newMessages || [];
         },
 
         // elements we'll reference more than once; grab from here instead of multiple calls to $()
@@ -90,15 +37,15 @@
             handleSuccessfulResponse = function(response) {
 
                 // build up array of message objects from raw paragraphs returned
-                var messages = [];
+                var newMessages = [];
                 $.each(response, function(i, paragraph) {
-                    var randomUserId = generateRandomInteger(users.length - 1),
-                    randomUserName = users[randomUserId];
-                    messages.push(new ChatMessage(randomUserName, paragraph));
+                    var randomUserId = generateRandomInteger(o.users.length - 1),
+                    randomUserName = o.users[randomUserId];
+                    newMessages.push(new ChatMessage(randomUserName, paragraph));
                 });
 
                 // throw event to be processed by any listeners
-                $.event.trigger(new ChatMessagesReceivedEvent(messages));
+                $.event.trigger(new ChatMessagesReceivedEvent(newMessages));
 
             },
 
@@ -108,9 +55,9 @@
                     randomSentences = null;
                 for(var i = 0; i < generateRandomInteger(5); i++) {
                     var paragraph = null,
-                        beginSlice = generateRandomInteger(messages.length - 1),
+                        beginSlice = generateRandomInteger(o.messages.length - 1),
                         sliceLength = generateRandomInteger(beginSlice + 5, beginSlice + 1);
-                    randomSentences = messages.slice(beginSlice, sliceLength);
+                    randomSentences = o.messages.slice(beginSlice, sliceLength);
                     paragraph = randomSentences.join(' ');
                     randomMessages.push(paragraph);
                 }
@@ -187,7 +134,7 @@
 
     function populateUsers() {
         var usersList = '';
-        $.each(users, function(i, userName) {
+        $.each(o.users, function(i, userName) {
             usersList += '<li data-user-name="' + userName + '"><i class="icon-user"></i> ' + userName + '</li>';
         });
         $elementCache.usersContainer.append(usersList);
@@ -216,9 +163,6 @@
 
         // dynamically set the height of the chat window to be full height less room for other content
         targetHeight = windowHeight - (otherStuffHeight + o.bottomPadding);
-
-
-        window.console.log("Target height is: " + targetHeight);
         $elementCache.messagesContainer.css({
             height: targetHeight + 'px'
         });
@@ -237,7 +181,63 @@
             usersContainer: "ul.users"
         },
         pollDelay: 2000,
-        useLoremIpsumRestApi: true
+
+        // 25 static messages to randomly show in case we're running as a stand-alone HTML page
+        messages: [
+            "Skate ipsum dolor sit amet, vert slappy dude no comply Matt Hensley coper.",
+            "540 skate key rocket air nose grab Justin Regan ollie north.",
+            "Camel back full-cab kingpin heel flip airwalk.",
+            "Opposite footed John Grigley darkslide crail slide heel flip kickturn.",
+            "Saran Wrap nose grab face plant salad grind boardslide.",
+            "Aerial shoveit rails slam concave Vatoland.",
+            "Spine slam wheels sick betty.",
+            "G-turn Jason Dill aerial salad grind opposite footed gap.",
+            "Ollie hang up roll-in finger flip half-cab.",
+            "Rocket air hanger slide melancholy full pipe.",
+            "Steps handplant tuna-flip stalefish axle.",
+            "Stalefish axle set rip grip casper slide Plan B 720.",
+            "Bigspin snake hanger rock and roll christ air mongo stalefish.",
+            "Crooked grind masonite manual lip nose Tod Swank hang up carve.",
+            "Grab locals flypaper Madonna helipop coper shoveit method air.",
+            "Nose blunt concave rock and roll invert rad nollie salad grind.",
+            "H-Street tuna-flip crail slide spine noseblunt slide slob air pool backside.",
+            "Japan air Tracker roll-in wall ride wax Primo slide gnarly.",
+            "Snake kidney skater handplant steps slam 540.",
+            "Baseplate rip grip shoveit shinner pivot frigid air handplant.",
+            "Sponsored nose grab slide kickflip disaster Spike Jonze pool pump.",
+            "Face plant pivot S.K.A.T.E. street soul skate kickturn 360 quarter pipe.",
+            "Acid drop nosepicker death box Wes Humpston boneless kidney bigspin cess slide.",
+            "Nosegrind bearings slappy invert. Drop in slappy mini ramp Sacto flail. ",
+            "Skate key 720 grind noseblunt slide. "
+        ],
+
+        // whether to use the REST API by default
+        useLoremIpsumRestApi: true,
+
+        // used to randomly show a fake username
+        users: [
+            "KJongIllin",
+            "rMugabe",
+            "THanshwe",
+            "OHalbashir",
+            "GBerdimuhamedov",
+            "MoGadhafi",
+            "SaddamH",
+            "JoeStalin",
+            "APinochet",
+            "IAmMrPaulBiya",
+            "PapaDocDuvalier",
+            "FranciscoFranco",
+            "MiltonObote",
+            "ASadatFromMisr",
+            "JeanBaptisteBagaza",
+            "WhoYouCallingAHoChiMinh",
+            "Lukashenko",
+            "SaisAfwerki",
+            "FidelC",
+            "KhomeiniTheAyatollah"
+        ]
+
     };
 
     /**
