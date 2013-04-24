@@ -8,11 +8,11 @@ A simulated chat window using an event-driven model.
 
 Features
 --------
-* Event-driven model showcases with two listeners; one of them highlights "who's chatting"
+* Event-driven model showcases two event listeners; one of them highlights "who's chatting"
 * Allows for using a Lorem-Ipsum generator REST API or static text version
 * Defaults to static text if run as a stand-alone HTML page (same-origin policy)
 * Uses jQuery module pattern to allow customization during initialization
-* *Almost* no custom CSS required (see general noteS)
+* *Almost* no custom CSS required (see general notes section)
 
 Installation
 ------------
