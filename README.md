@@ -14,6 +14,12 @@ Features
 * Uses jQuery module pattern to allow customization during initialization
 * *Almost* no custom CSS required (see general notes section)
 
+
+adslkajsdfk;ljasdf
+"asld;kfjalskdfjhasfd
+lkjahsdflkjahsdf
+lkjahsdflkjahsdf
+
 Installation
 ------------
 1. Open index.html in your target browser
