@@ -83,7 +83,7 @@ but I got the names [from here](http://www.25facts.com/top-25-dictators-of-the-w
 *Disclaimer: I do not condone dictatorial rule. I appologize for any skateboard-loving dictators
 I may have offended by not including them in this chat.*
 
-
+*Special note: shout out to the Monitise team for being awesome!*
 
 
 Problem Statement
